@@ -221,3 +221,35 @@ class MiImperio():
 			print(f"{e}")
 		except ValueError as e:
 			print(f"{e}")
+
+if __name__ == "__main__":
+    print(" INICIANDO SISTEMA DE MANTENIMIENTO MI IMPERIO")
+
+    # 1. Instanciación correcta de clases
+    sistema = MiImperio()
+    almacen_principal = Almacen("Almacen Central", "Estrella de la Muerte")
+    sistema.anadirAlmacen(almacen_principal)
+
+    caza = CazaEstelar("TIE-01", 1234, "Caza Interceptor", 1)
+    sistema.anadirNave(caza)
+
+    print("\n[INFO] Naves y almacenes instanciados correctamente.")
+    print(caza.devuelveInfo())
+
+    # 2. Añadimos stock inicial
+    motor = Repuesto("Motor Hiperimpulsor", "Kuat", 5, 1000)
+    sistema.anadirStock("Almacen Central", motor)
+    almacen_principal.obtenerInventario()
+
+    print("\n--- PRUEBAS DE EXCEPCIONES ---")
+    # 3. Prueba Exitosa
+    print("\nIntento 1: Transferir 2 motores al Caza (Debería funcionar)")
+    sistema.transferirRepuestoANave("Caza Interceptor", "Almacen Central", "Motor Hiperimpulsor", 2)
+
+    # 4. Prueba Excepción 1: Stock Insuficiente
+    print("\nIntento 2: Transferir 10 motores al Caza (Debería fallar por stock)")
+    sistema.transferirRepuestoANave("Caza Interceptor", "Almacen Central", "Motor Hiperimpulsor", 10)
+
+    # 5. Prueba Excepción 2: Repuesto No Encontrado
+    print("\nIntento 3: Transferir un 'Panel Solar' (Debería fallar por no existir)")
+    sistema.transferirRepuestoANave("Caza Interceptor", "Almacen Central", "Panel Solar", 1)
