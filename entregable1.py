@@ -47,3 +47,12 @@ class Repuesto():
 	def getNombre(self):
 		return self.nombre
 
+class Unidad(metaclass = ABCMeta):
+	def __init__(self, id_combate: str, clave: int):
+		self.id_combate = id_combate
+		self.clave = clave
+
+	@abstractmethod
+	def devuelveInfo(self):
+		pass
+
