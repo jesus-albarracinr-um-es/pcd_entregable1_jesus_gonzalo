@@ -56,3 +56,49 @@ class Unidad(metaclass = ABCMeta):
 	def devuelveInfo(self):
 		pass
 
+class Nave(Unidad):
+	def __init__(self, id_combate: str, clave: int, nombre: str):
+		super().__init__(id_combate, clave)
+
+		self.nombre = nombre
+		self.catalogo = {}
+
+	def adquirirRepuestos(self, nombreRepuesto: str, cantidad: int):
+		if nombreRepuesto in self.catalogo:
+			self.catalogo[nombreRepuesto] += cantidad #Añadimos al stock ya existente en caso de que una nave ya tenga stock
+		else:
+			self.catalogo[nombreRepuesto] = cantidad
+
+		print(f"Stock de la nave {self.nombre} actualizada: {self.catalogo[nombreRepuesto]}x '{nombreRepuesto}'.")	
+
+class CazaEstelar(Nave):
+	def __init__(self, id_combate:str, clave:int, nombre:str, dotacion: int):
+		super().__init__(id_combate, clave, nombre)
+
+		self.dotacion = dotacion
+
+	def devuelveInfo(self):
+		return f"Caza estelar: {self.nombre}, ID: {self.id_combate}, Clave: {self.clave}, Dotación: {self.dotacion}"
+	
+class NaveEstelar(Nave):
+	def __init__(self, id_combate:str, clave:int, nombre:str, tripulacion: int, pasaje: int, clase: Clase):
+		super().__init__(id_combate, clave, nombre)
+
+		self.tripulacion = tripulacion
+		self.pasaje = pasaje
+		self.clase = clase
+
+	def devuelveInfo(self):
+		return f"Nave Estelar: {self.nombre}, ID: {self.id_combate}, Clave: {self.clave}, Tripulación: {self.tripulacion}, Pasaje: {self.pasaje}, Clase: {self.clase}"
+	
+class EstacionEspacial(Nave):
+	def __init__(self, id_combate:str, clave: int, nombre: str, tripulacion: int, pasaje: int, ubicacion: Ubicacion):
+		super().__init__(id_combate, clave, nombre)
+
+		self.tripulacion = tripulacion
+		self.pasaje = pasaje
+		self.ubicacion = ubicacion
+
+	def devuelveInfo(self):
+		return f"Estación Espacial: {self.nombre}, ID: {self.id_combate}, Clave: {self.clave}, Tripulación: {self.tripulacion}, Pasaje: {self.pasaje}, Ubicación: {self.ubicacion.name}"	
+	
