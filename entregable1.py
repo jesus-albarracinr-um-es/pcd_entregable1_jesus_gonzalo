@@ -101,4 +101,42 @@ class EstacionEspacial(Nave):
 
 	def devuelveInfo(self):
 		return f"Estación Espacial: {self.nombre}, ID: {self.id_combate}, Clave: {self.clave}, Tripulación: {self.tripulacion}, Pasaje: {self.pasaje}, Ubicación: {self.ubicacion.name}"	
-	
+
+class Almacen():
+	def __init__(self, nombre: str, localizacion: str):
+		self.nombre = nombre
+		self.localizacion = localizacion
+		self.catalogo = {}
+
+	def devuelveAlmacen(self):
+		return f"Nombre: {self.nombre}, Localización: {self.localizacion}, Catálogo: {self.catalogo}"
+
+	def anadirRepuesto(self, nuevo_repuesto):
+		# Este método va dentro de la clase Almacen
+		nombre_pieza = nuevo_repuesto.getNombre()
+		# 1. Comprobamos si la pieza ya existe en el catálogo
+		if nombre_pieza in self.catalogo:
+            # Si existe, recuperamos la pieza antigua y le sumamos la cantidad de la nueva
+			pieza_existente = self.catalogo[nombre_pieza]
+			cantidad_a_sumar = nuevo_repuesto.getCantidad()
+			
+			pieza_existente.modificarCantidad(cantidad_a_sumar)
+			print(f"[+] Stock actualizado: '{nombre_pieza}' ahora tiene {pieza_existente.getCantidad()} unidades en {self.nombre}.")
+            
+		else:
+            # 2. Si no existe, la añadimos como una pieza totalmente nueva
+			self.catalogo[nombre_pieza] = nuevo_repuesto
+			print(f"[+] Repuesto '{nombre_pieza}' registrado por primera vez en {self.nombre}.")
+
+	def buscarRepuesto(self, nombre_repuesto: str):
+		if nombre_repuesto not in self.catalogo:
+            # Lanzamos excepción si no existe
+			raise RepuestoNoEncontradoError(f"El repuesto '{nombre_repuesto}' no se encuentra en el almacén '{self.nombre}'.")
+		return self.catalogo[nombre_repuesto]
+		
+	def obtenerInventario(self):
+		if len(self.catalogo) == 0:
+			return "El almacén se encuentra vacío"
+		else:
+			for pieza in self.catalogo.values():
+				print(pieza.getInfoRepuesto())
