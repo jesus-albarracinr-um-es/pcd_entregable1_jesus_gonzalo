@@ -140,3 +140,84 @@ class Almacen():
 		else:
 			for pieza in self.catalogo.values():
 				print(pieza.getInfoRepuesto())
+
+class MiImperio():
+	def __init__(self):
+		self.naves = []
+		self.almacenes = []
+
+	def anadirNave(self, nuevaNave: Nave):
+		self.naves.append(nuevaNave)
+
+	def consultarNaves(self):
+		if not self.naves:
+			print("No existen naves todavía")
+		else:
+			for nave in self.naves:
+				print(nave.devuelveInfo())
+
+	def anadirAlmacen(self, nuevoAlmacen: Almacen):
+		self.almacenes.append(nuevoAlmacen)
+		print(f"{nuevoAlmacen.nombre} añadido al Imperio")
+
+	def consultarAlmacen(self, nombre:str):
+		for almacen in self.almacenes:
+			if (nombre == almacen.nombre):
+				return almacen
+		return f"El almacén {almacen} no ha sido encontrado"
+			
+	def listarStock(self):
+		for almacen in self.almacenes:
+			almacen.obtenerInventario()
+
+	def anadirStock(self, nombre_almacen: str, repuesto: Repuesto):
+        # Primero buscamos si el almacén existe en nuestro sistema
+		almacen = self.consultarAlmacen(nombre_almacen)
+        
+		if almacen:
+            # Si el almacén existe 
+			almacen.anadirRepuesto(repuesto)
+		else:
+			print(f"Error: No se puede añadir stock. El almacén '{nombre_almacen}' no existe.")
+
+	def sacarStock(self, nombre_almacen: str, nombre_pieza: str, cantidad: int):
+		almacen = self.consultarAlmacen(nombre_almacen)
+		if almacen:
+			pieza = almacen.buscarRepuesto(nombre_pieza)
+			
+			if pieza and pieza.getCantidad() >= cantidad:
+				pieza.modificarCantidad(-cantidad)
+				print(f"Se han retirado {cantidad} unidades de {nombre_pieza}")
+				return True
+			else:
+				print(f"Error: Stock insuficiente o pieza no encontrada en {nombre_almacen}")
+				return False
+		return False
+
+	def transferirRepuestoANave(self, nombre_nave: str, nombre_almacen: str, nombre_pieza: str, cantidad: int):
+        # TRATAMIENTO DE EXCEPCIONES MEDIANTE TRY-EXCEPT
+		try:
+            # 1. Buscamos el almacén
+			almacen_destino = next((a for a in self.almacenes if a.nombre == nombre_almacen), None)
+			if not almacen_destino:
+				raise ValueError(f"El almacén '{nombre_almacen}' no existe.")
+
+            # 2. Buscamos la nave
+			nave_destino = next((n for n in self.naves if n.nombre == nombre_nave), None)
+			if not nave_destino:
+				raise ValueError(f"La nave '{nombre_nave}' no existe.")
+
+            # 3. Intentamos buscar y restar la pieza (puede lanzar excepciones)
+			pieza = almacen_destino.buscarRepuesto(nombre_pieza)
+			pieza.modificarCantidad(-cantidad)
+            
+            # 4. Si todo va bien, se lo damos a la nave
+			nave_destino.adquirirRepuestos(nombre_pieza, cantidad)
+			print(f"Transferencia de {cantidad}x '{nombre_pieza}' completada con éxito.")
+			
+		except RepuestoNoEncontradoError as e:
+			print(f"{e}")
+		except StockInsuficienteError as e:
+			print(f"{e}")
+		except ValueError as e:
+			print(f"{e}")
