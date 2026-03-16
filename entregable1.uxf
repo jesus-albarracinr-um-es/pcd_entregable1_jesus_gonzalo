@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>352</x>
+      <y>16</y>
+      <w>320</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>MiImperio
+--
+-naves: list
+-almacenes: list
+--
++consultarNaves()
++añadirNave(nuevaNave: Nave)
++consultarAlmacen(almacen: str)
++transferirRepuestoNave(nombre_nave:str, nombre_almacen: 
+str, nombre_repuesto: str, cantidad: int)
++listarStock()
++añadirStock()
++sacarStock()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>984</x>
+      <y>368</y>
+      <w>160</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>Estación Espacial
+--
+-tripulacion: int
+-pasaje: int
+-ubicacion: Ubicacion
+--
++devuelveInfo(str):</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>696</x>
+      <y>232</y>
+      <w>280</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Nave
+--
+-nombre: str
+-catálogo: dict
+--
++adquirirRepuestos(nombreRepuesto: str, cantidad: int)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>984</x>
+      <y>584</y>
+      <w>160</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ENUMERATION&gt;&gt;
+Ubicacion
+--
+Endor
+Cumulo Raimos
+Nebulosa Kaliida</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>416</y>
+      <w>152</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>Nave Estelar
+--
+-tripulacion: int
+-pasaje: int
+-clase: Clase
+--
++devuelveInfo(): str</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>600</y>
+      <w>160</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;ENUMERATION&gt;&gt;
+Clase
+--
+Ejecutor
+Eclipse
+Soberano</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>608</y>
+      <w>192</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Caza estelar
+--
+-dotacion: int
+--
++devuelveInfo(): str</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>752</x>
+      <y>56</y>
+      <w>128</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+Unidad
+--
+-id_combate: str
+-clave: int
+--
++devuelveInfo()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>96</x>
+      <y>296</y>
+      <w>184</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>Repuesto
+--
+-nombre: str
+-proveedor: str
+-cantidad: int
+-precio: int
+--
++getInfoRepuesto()
++getCantidad()
++modificarCantidad(variacion: int)
++setCantidad(nueva: int)
++getNombre(): str</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>104</x>
+      <y>24</y>
+      <w>184</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>Almacen
+--
+-nombre: str
+-localizacion: str
+-catalogo: dict()
+--
++devuelveAlmacen()
++añadirRepuesto()
++buscarRepuesto()
++obtenerInventario()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>88</y>
+      <w>88</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1..n
+m2=1</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>176</x>
+      <y>144</y>
+      <w>40</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>968</x>
+      <y>296</y>
+      <w>104</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0;110.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>792</x>
+      <y>336</y>
+      <w>24</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>336</y>
+      <w>208</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>240.0;10.0;240.0;70.0;170.0;70.0;170.0;160.0;10.0;160.0;10.0;340.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>792</x>
+      <y>152</y>
+      <w>24</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>792</x>
+      <y>536</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1056</x>
+      <y>488</y>
+      <w>24</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>664</x>
+      <y>88</y>
+      <w>104</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=0..n
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>288</y>
+      <w>440</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=0..n
+m2=1</panel_attributes>
+    <additional_attributes>530.0;10.0;260.0;10.0;260.0;80.0;10.0;80.0</additional_attributes>
+  </element>
+</diagram>
